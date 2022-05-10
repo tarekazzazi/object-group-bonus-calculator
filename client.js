@@ -43,6 +43,24 @@ console.log(employees);
 
 
 //////////////////////////////////////
+let displayEmployee = [];
+$(document).ready(()=>{
+  console.log('JQ');
+  $('#Results').hide();
+  $('#button').on('click', ()=>{
+    displayEmployeeBonuses( employees );
+    console.log(displayEmployee);
+    for (let employee of displayEmployee) {
+      $('#Results').show();
+      let ul = $('#Results')
+
+      ul.append('<l1>')
+
+
+    }
+  })
+
+})
 
 function employeeBonusesCal(employeeObject) {
 
@@ -120,9 +138,11 @@ if(bonusPercentage < 0){
 
 
 
-
-for (const employee of employees) {
-  let res = employeeBonusesCal(employee)
-  console.log(res);
+function displayEmployeeBonuses(employeeArray) {
+  for (const employee of employeeArray) {
+    let res = employeeBonusesCal(employee)
+    displayEmployee.push(res);
+  }
 }
+
 
