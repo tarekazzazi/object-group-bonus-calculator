@@ -41,50 +41,88 @@ const employees = [
 
 console.log(employees);
 
-function employeeBonuses(employeeObject) {
+
+//////////////////////////////////////
+
+function employeeBonusesCal(employeeObject) {
 
   let totalBonus = 0;
   let rating = employeeObject.reviewRating;
   let name = employeeObject.name;
+  let salary = Number(employeeObject.annualSalary);
+  let bonusPercentage = calBonusAmount(employeeObject)
   let totalCompensation = 0;
 
-  if (rating <= 2) {
+  totalBonus = bonusPercentage * salary;
+  totalCompensation = totalBonus + salary;
 
-    totalBonus += 0;
-
-    totalCompensation += totalBonus + Number(employeeObject.annualSalary);
-
-  } else if (rating === 3) {
-
-    totalBonus += employeeObject.annualSalary * .04;
-
-    totalCompensation += totalBonus + Number(employeeObject.annualSalary);
-
-  } else if (rating === 4) {
-
-    totalBonus += employeeObject.annualSalary * .06;
-
-    totalCompensation += totalBonus + Number(employeeObject.annualSalary);
-
-  } else if (rating === 5) {
-
-    totalBonus += employeeObject.annualSalary * .010;
-
-    totalCompensation += totalBonus + Number(employeeObject.annualSalary);
+  return {
+    name,
+    bonusPercentage,
+    totalCompensation,
+    totalBonus
   }
-  return totalCompensation;
+
+
 }
 
-let bonus = employeeBonuses(employees[1]);
-console.log(bonus);
+function calBonusAmount(employeeObject){
+  let bonusPercentage = 0;
+  let rating = employeeObject.reviewRating;
+  let salary = Number(employeeObject.annualSalary);
 
-function LoopBonuses(arrayObjects) {
-    for (const employeee of arrayObjects) {
-      let eBonus = employeeBonuses(employeee);
-      console.log(eBonus);
-      
-    }
-  
+//check to see if employee has a 4 digit emplyNumber
+//if so add 5%
+  if(employeeObject.employeeNumber.length === 4){
+  bonusPercentage += .05
+  }
+
+
+//check employee review rating
+//add bonus base on rating
+if (rating <= 2) {
+
+  bonusPercentage += 0;
+
+
+} else if (rating === 3) {
+
+  bonusPercentage += .04;
+
+
+} else if (rating === 4) {
+
+  bonusPercentage +=  .06;
+
+
+} else if (rating === 5) {
+
+  bonusPercentage += .10;
+
 }
 
-LoopBonuses(employees);
+console.log(salary);
+
+if(salary > 65000){
+  bonusPercentage -= .01
+}
+
+if(bonusPercentage > .13){
+  bonusPercentage = .13
+}
+
+if(bonusPercentage < 0){
+  bonusPercentage = 0
+}
+ 
+ return bonusPercentage
+}
+
+
+
+
+for (const employee of employees) {
+  let res = employeeBonusesCal(employee)
+  console.log(res);
+}
+
