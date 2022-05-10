@@ -39,4 +39,52 @@ const employees = [
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
-console.log( employees );
+console.log(employees);
+
+function employeeBonuses(employeeObject) {
+
+  let totalBonus = 0;
+  let rating = employeeObject.reviewRating;
+  let name = employeeObject.name;
+  let totalCompensation = 0;
+
+  if (rating <= 2) {
+
+    totalBonus += 0;
+
+    totalCompensation += totalBonus + Number(employeeObject.annualSalary);
+
+  } else if (rating === 3) {
+
+    totalBonus += employeeObject.annualSalary * .04;
+
+    totalCompensation += totalBonus + Number(employeeObject.annualSalary);
+
+  } else if (rating === 4) {
+
+    totalBonus += employeeObject.annualSalary * .06;
+
+    totalCompensation += totalBonus + Number(employeeObject.annualSalary);
+
+  } else if (rating === 5) {
+
+    totalBonus += employeeObject.annualSalary * .010;
+
+    totalCompensation += totalBonus + Number(employeeObject.annualSalary);
+  }
+  return totalCompensation;
+}
+
+let bonus = employeeBonuses(employees[1]);
+console.log(bonus);
+
+function LoopBonuses(arrayObjects) {
+    for (const employeee of arrayObjects) {
+      let eBonus = employeeBonuses(employeee);
+      console.log(eBonus);
+      
+    }
+  
+}
+
+LoopBonuses(employees);
